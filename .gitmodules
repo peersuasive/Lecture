@@ -4,3 +4,6 @@
 [submodule "luce"]
 	path = luce
 	url = https://github.com/peersuasive/luce.git
+[submodule "3rd/libarchive"]
+	path = 3rd/libarchive
+	url = https://github.com/libarchive/libarchive.git
