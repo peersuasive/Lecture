@@ -64,7 +64,7 @@
             <key>CFBundleTypeExtensions</key>
             <array>
                 <string>tar</string>
-                <string>tbz</string>
+                <string>cbt</string>
             </array>
             <key>CFBundleTypeIconFile</key>
             <string>Icon.icns</string>
