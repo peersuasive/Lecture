@@ -1,0 +1,6 @@
+.*.sw*
+*.so
+local/
+tmp/
+data/
+resources/

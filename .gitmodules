@@ -1,0 +1,3 @@
+[submodule "src/embed"]
+	path = src/embed
+	url = https://github.com/peersuasive/luce_embeddable.git

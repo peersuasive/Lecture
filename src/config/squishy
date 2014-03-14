@@ -1,0 +1,12 @@
+-- Output filename
+Output "oResult.lua"
+
+-- This is normal/main script
+Main "../main.lua"
+
+-- gadokai base system
+Module "luce"           "luce.lua"
+Module "arch"           "../arch.lua"
+Module "ImageContainer" "../ImageContainer.lua"
+Module "LApplication"   "../LApplication.lua"
+Module "LDocument"      "../LDocument.lua"

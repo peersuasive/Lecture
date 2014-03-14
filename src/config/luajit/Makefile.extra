@@ -1,0 +1,8 @@
+WITH_EXTRA_MODULES = 1
+CFLAGS_EXTRA += -I. -Iextra
+#EXTRA_O += modules/zzip/luazip.o
+EXTRA_O += modules/decomp/decomp.o
+ifeq (Android,$(TARGET_SYS))
+	TARGET_LIBS += ../../sources/libarchive_android.a -lz
+endif
+#TARGET_LIBS += -lzzip -lz

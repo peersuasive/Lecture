@@ -1,0 +1,37 @@
+ifeq ($(XCROSS),osx)
+	#EXTRALIBS += sources/libzzip_static_osx.a -lz
+	EXTRALIBS += sources/libarchive_osx.a -lz
+	ifneq (,$(XSTATIC))
+		STATIC_OBJS := sources/libcore_osx.a
+	endif
+else
+ifeq ($(XCROSS),ios)
+	#EXTRALIBS += sources/libzzip_static_ios.a -lz
+	EXTRALIBS += sources/libarchive_ios.a -lz
+	ifneq (,$(XSTATIC))
+		STATIC_OBJS := sources/libcore_ios.a
+	endif
+else
+ifeq ($(XCROSS),android)
+	#EXTRALIBS += -Lsources/android sources/libarchive_android.a -lz
+	ifneq (,$(XSTATIC))
+		#STATIC_OBJS := sources/libcore_android.a
+	endif
+else
+ifeq ($(XCROSS),win)
+	## TODO: compile light libarchive for win
+	#EXTRALIBS += sources/libarchive_win.a -lz
+	EXTRALIBS += -larchive -lxml2 -llzma -lbz2 -lz -liconv -lnettle -liconv
+	ifneq (,$(XSTATIC))
+		STATIC_OBJS := sources/libcore_win.a
+	endif
+else
+	#EXTRALIBS += sources/libzzip_static_lin.a -lz
+	EXTRALIBS += sources/libarchive_lin.a -lz
+	ifneq (,$(XSTATIC))
+		STATIC_OBJS := sources/libcore_lin.a
+	endif
+endif
+endif
+endif
+endif
