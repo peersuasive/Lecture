@@ -103,7 +103,7 @@ Downloads
 (built with `Luce/Embedded <https://github.com/peersuasive/luce_embeddable>`_)
 
 - `Linux (x86_64/glibc 2.13, debian package)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture-0.0.1-1.x86_64.deb>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture-0.1-1.amd64.deb>`_
 
 - `Linux (x86_64/glibc 2.13)
   <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.Linux64.zip>`_
