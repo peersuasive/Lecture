@@ -55,6 +55,7 @@ local function new(name, ...)
         start    = nil,
         exit     = nil,
         os       = nil,
+        has_initialised = false,
     }
 
     ---
@@ -105,7 +106,11 @@ local function new(name, ...)
     local function logError(msg, ...)
         local msg = "Error: "..(msg or "")
         log(msg, ...)
-        self:exit(1)
+        if(self.has_initialised)then
+            self:quit(1)
+        else
+            os.exit(1)
+        end
     end
     self.log      = log
     self.logError = logError
@@ -179,6 +184,7 @@ local function new(name, ...)
     end
     local n = 0
     local function initialise(...)
+        self.has_initialised = true
         n = n+1
         local extra = not(tostring(...)=="") and {...} or {}
         local params = {}

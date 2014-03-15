@@ -62,7 +62,7 @@ local function MainWindow(params)
     local is_mobile = app.os.ios or app.os.android 
     local comp      = nil -- the child component, ImageContainer for Desktops, ImageList for mobiles
 
-    local imageSize = {800,600} -- default size
+    local imageSize = luce:Point{800,600} -- default size
     local bookName  = "Lecture" -- default name
 
     local cached, preloaded, startIndex = 3, 3 -- some default parameters for ImageContainer
@@ -91,8 +91,8 @@ local function MainWindow(params)
             logError("Couldn't read book: %s", (e or "<no message>"))
         end
 
-        imageSize = size
-        bookTitle = (title or bookTitle)..":"..nb
+        imageSize = size or imageSize
+        bookName = (title or bookName)..":"..nb
     end
  
     -- compute size of the window from image size
@@ -114,7 +114,7 @@ local function MainWindow(params)
     mc:addAndMakeVisible(comp)
 
     -- document window
-    local documentWindow = require"LDocument"(bookTitle)
+    local documentWindow = require"LDocument"(bookName)
     documentWindow:setBackgroundColour( luce.Colours.black )
 
     documentWindow:setContentOwned( mc, true )
