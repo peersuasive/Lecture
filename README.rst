@@ -62,15 +62,25 @@ and Windows to open a book.
 Available shorcuts
 ------------------
 
-    :space/right:        next page
-    :backspace/left:     previous page
-    :home:               1st page
-    :end:                last page
-    :f (+cmd for OS X):  toggle full screen
-    :s:                  toggle slider
-    :q (+cmd for OS X):  quit
-    :cmd+w:              close window (quit on Linux and Windows)
-    :i:                  show some info on current page
+    +-------------------+------------------------------------------+
+    | space/right       | next page                                |
+    +-------------------+------------------------------------------+
+    | backspace/left    | previous page                            |
+    +-------------------+------------------------------------------+
+    | home              | 1st page                                 |
+    +-------------------+------------------------------------------+
+    | end               | last page                                |
+    +-------------------+------------------------------------------+
+    | f (+cmd for OS X) | toggle full screen                       |
+    +-------------------+------------------------------------------+
+    | s:                | toggle slider                            |
+    +-------------------+------------------------------------------+
+    | q (+cmd for OS X) | quit                                     |
+    +-------------------+------------------------------------------+
+    | cmd+w             | close window (quit on Linux and Windows) |
+    +-------------------+------------------------------------------+
+    | i                 | show some info on current page           |
+    +-------------------+------------------------------------------+
 
 
 What's inside
