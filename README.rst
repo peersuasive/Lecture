@@ -110,7 +110,7 @@ Downloads
 
 
 - `Mac OS X (x86_64, 10.9, untested on previous releases)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.MasOSX64.zip>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.MacOSX64.zip>`_
 
 - `Windows (x86)
   <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.Win32.zip>`_
