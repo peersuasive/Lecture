@@ -221,7 +221,7 @@ local function new(_, name)
     local zoom_step   = 0.1
     local function set_bounds(bounds, zoom_update)
         local bounds = luce:Rectangle(bounds or {0, 0, comp:getParentWidth(), comp:getParentHeight()})
-        if not(comp:isShowing())then return end
+        --if not(comp:isShowing())then return end
         local r = luce:Rectangle(bounds)
         if(fit_width)then
             r.h = r.w * self.info.ratio

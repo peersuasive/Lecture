@@ -14,7 +14,7 @@ Lecture, The Luce Written In One Shot Omni Platform Comics Reader
 
 ------------------------------------------------------------------------------]]
 
-local app, luce = require"LApplication"("Lecture", ...)
+local app, luce = require"luce.LApplication"("Lecture", ...)
 
 local log, logError = app.log, app.logError
 
@@ -32,26 +32,6 @@ local function help(msg)
     msg = string.format("%sUsage: %s <book>\n\n%s", msg, "lecture", sc)
     return msg
 end
-
---[[-- rst
-
-    dans app, j'ai
-
-       args: les paramètres fournis au lancement, s'il y en a
-         os: l'OS sur lequel s'exécute l'appli: unix, linux, osx, android, ios, win
-       init: le callback initialise auquel je fournis ma classe principale et les classes
-             complémentaires
-    kevents: les événements input, clavier, souris, touch, etc...
-      paint: callback paint du composant principal
-    resized: callback resized du composant principal
-initialised: callback appelé lorsque l'application a terminé son initisalisation
-      start: la function qui démarre la boucle principale, à laquelle je peux fournir
-             un callback qui sera exécuté à chaque appel; l'effet est différent selon l'os,
-             le callback n'est pour le moment disponible que pour Linux et Windows.
-       exit: quitte l'application avec le code de sortie ou 0 
-        log: enregistre dans le log ou affiche dans le terminal
-   logError: enregistre dans le log d'erreur ou affiche dans le terminal et quitte l'application
---]]
 
 -- MainWindow component, the core of the application
 -- it'll be called by the Application class once the environment
@@ -110,11 +90,12 @@ local function MainWindow(params)
     -- main component
     local mc = luce:MainComponent("MainComponent:"..nb)
     mc:setSize(wsize)
-
-    mc:addAndMakeVisible(comp)
+    if(comp)then
+        mc:addAndMakeVisible(comp)
+    end
 
     -- document window
-    local documentWindow = require"LDocument"(bookName)
+    local documentWindow = luce:Document(bookName)
     documentWindow:setBackgroundColour( luce.Colours.black )
 
     documentWindow:setContentOwned( mc, true )
@@ -129,7 +110,7 @@ local function MainWindow(params)
             documentWindow:setFullScreen()
             return true
 
-        elseif not(app.os.osx) and (k==K"Q" or k==K"q") then
+        elseif (k==K"Q" or k==K"q") and (m:isCommandDown() or not(app.os.osx)) then
             app:exit()
             return true
 
@@ -138,23 +119,26 @@ local function MainWindow(params)
             return true
 
         else
-            return comp:userKeyEvent(k,m)
+            if(comp and comp.userKeyEvent)then
+                return comp:userKeyEvent(k,m)
+            else
+                return false
+            end
         end
     end)
 
     mc:resized(function(...)
         comp:setBounds( mc:getBounds() )
     end)
-
+    documentWindow:resized(function(...)
+        mc:repaint()
+    end)
     documentWindow:closeButtonPressed(function()
         documentWindow:closeWindow()
     end)
 
-    documentWindow:setVisible(true)
-
-    -- TODO: wrap this or create a LDocumentWindow class,
-    --       the name app is too confusing
     documentWindow:setSize{w, screenH}
+    documentWindow:setVisible(true)
 
     return documentWindow
 end
@@ -167,7 +151,9 @@ app:systemRequestedQuit(function()
     app:exit()
 end)
 
-local manual = false         -- gives control over the main loop
-                             -- implemented for Linux and Windows only at the moment
-local poller = function()end -- id.
-return app:start( MainWindow, size, manual, manual and poller )
+local manual      = false      -- gives control over the main loop (not supported by iOS and Android a.t.m.)
+local osx_delayed = false      -- if we want OS X app to start with a window or wait for user actions, like dropping a file, etc.
+local poller      = function() -- a callback to provide controlled loop with
+    print "I'm in the main loop!"
+end
+return app:start( MainWindow, osx_delayed, manual, manual and poller )
