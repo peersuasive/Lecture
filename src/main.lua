@@ -38,8 +38,13 @@ end
 -- is ready to show something
 local nb = 0
 local function MainWindow(params)
-    local app, luce = app, luce -- shortcutst
+    local app, luce = app, luce  -- shortcuts
+    local Colours   = luce.Colours -- id.
     local is_mobile = app.os.ios or app.os.android 
+
+    local documentWindow = luce:Document(bookName)
+    local mc        = luce:MainComponent("MainComponent:"..nb)
+
     local comp      = nil -- the child component, ImageContainer for Desktops, ImageList for mobiles
 
     local imageSize = luce:Point{800,600} -- default size
@@ -48,7 +53,6 @@ local function MainWindow(params)
     local cached, preloaded, startIndex = 3, 3 -- some default parameters for ImageContainer
 
     nb = nb+1
-
     if(is_mobile)then
         -- TODO
         -- instanciate a shelf
@@ -88,17 +92,12 @@ local function MainWindow(params)
     local wsize = { w, screenH }
 
     -- main component
-    local mc = luce:MainComponent("MainComponent:"..nb)
-    mc:setSize(wsize)
     if(comp)then
         mc:addAndMakeVisible(comp)
+        mc:resized(function(...)
+            comp:setBounds( mc:getBounds() )
+        end)
     end
-
-    -- document window
-    local documentWindow = luce:Document(bookName)
-    documentWindow:setBackgroundColour( luce.Colours.black )
-
-    documentWindow:setContentOwned( mc, true )
 
     -- some key actions
     local K = string.byte
@@ -127,16 +126,10 @@ local function MainWindow(params)
         end
     end)
 
-    mc:resized(function(...)
-        comp:setBounds( mc:getBounds() )
-    end)
-    documentWindow:resized(function(...)
-        mc:repaint()
-    end)
-    documentWindow:closeButtonPressed(function()
-        documentWindow:closeWindow()
-    end)
-
+    -- document window
+    mc:setSize(wsize)
+    documentWindow:setBackgroundColour( Colours.black )
+    documentWindow:setContentOwned( mc, true )
     documentWindow:setSize{w, screenH}
     documentWindow:setVisible(true)
 
@@ -153,7 +146,11 @@ end)
 
 local manual      = false      -- gives control over the main loop (not supported by iOS and Android a.t.m.)
 local osx_delayed = false      -- if we want OS X app to start with a window or wait for user actions, like dropping a file, etc.
+local has_shown = false
 local poller      = function() -- a callback to provide controlled loop with
-    print "I'm in the main loop!"
+    if not(has_shown)then
+        print "I'm in the main loop! I could do some useful things..."
+        has_shown = true
+    end
 end
-return app:start( MainWindow, osx_delayed, manual, manual and poller )
+return app:start( MainWindow, manual and poller, osx_delayed )
