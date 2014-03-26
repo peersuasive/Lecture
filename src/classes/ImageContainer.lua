@@ -36,14 +36,25 @@ local image_info = function(image, filename, position, total, n, size)
     }
 end
 
+local valid = {
+    jpg  = true,
+    jpeg = true,
+    png  = true,
+}
 local image_cache = function(book, icache, ipreload, iindex)
     local icache, ipreload, iindex = icache or 3, ipreload or 3, iindex or 1
  
     local arch, e = require"arch"( book )
     if not arch then return nil, e end
 
-    local imageList, e = arch:list()
-    if not imageList then return nil, e end
+    local imageList = {}
+    local list, e = arch:list()
+    if not list then return nil, e end
+    for _,i in next, list do
+        if(valid[i:lower():gsub('.*%.([^.]+)$','%1')])then
+            imageList[#imageList+1] = i
+        end
+    end
 
     return {
         index       = iindex,
