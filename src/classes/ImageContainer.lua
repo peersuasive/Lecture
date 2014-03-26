@@ -63,6 +63,7 @@ local image_cache = function(book, icache, ipreload, iindex)
             if not(n)then return nil, string.format("invalid index: %s",i or "nil") end
             if self.cache[n] then return n end
             local data = arch:get( n )
+            if not(data)then return nil, string.format("no data decoded") end
             self.cache[n] = luce.Image:getFromMemory( data )
             return n
         end,
