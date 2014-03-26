@@ -6,7 +6,5 @@ Main "../main.lua"
 
 -- gadokai base system
 Module "luce"           "luce.lua"
-Module "arch"           "../arch.lua"
-Module "ImageContainer" "../ImageContainer.lua"
-Module "LApplication"   "../LApplication.lua"
-Module "LDocument"      "../LDocument.lua"
+Module "arch"           "../classes/arch.lua"
+Module "ImageContainer" "../classes/ImageContainer.lua"
