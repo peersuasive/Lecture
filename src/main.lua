@@ -14,6 +14,7 @@ Lecture, The Luce Written In One Shot Omni Platform Comics Reader
 
 ------------------------------------------------------------------------------]]
 
+local luce = require"luce"
 local app, luce = require"luce.LApplication"("Lecture", ...)
 
 local log, logError = app.log, app.logError
