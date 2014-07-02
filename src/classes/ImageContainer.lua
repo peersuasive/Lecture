@@ -49,6 +49,7 @@ local image_cache = function(book, icache, ipreload, iindex)
 
     local imageList = {}
     local list, e = arch:list()
+    assert(#list>0, string.format("No image found: %s", (e or"(no error message)")))
     if not list then return nil, e end
     for _,i in next, list do
         if(valid[i:lower():gsub('.*%.([^.]+)$','%1')])then
