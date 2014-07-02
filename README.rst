@@ -92,7 +92,7 @@ What's inside
 - a custom lua module for libarchive
 - some bugs, most certainly
 
-Lecture v0.1 - shot 1
+Lecture v0.2 - shot 2
 =====================
 
 alpha release, probably buggy on any other desktop than mine.
@@ -103,17 +103,19 @@ Downloads
 (built with `Luce/Embedded <https://github.com/peersuasive/luce_embeddable>`_)
 
 - `Linux (x86_64/glibc 2.13, debian package)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture-0.1-1.amd64.deb>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.2/Lecture-v0.2-1.amd64.deb>`_
 
 - `Linux (x86_64/glibc 2.13)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.Linux64.zip>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.2/Lecture.0.2.Linux64.zip>`_
 
 
 - `Mac OS X (x86_64, 10.9, untested on previous releases)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.MacOSX64.zip>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.2/Lecture.0.2.MacOSX64.zip>`_
 
 - `Windows (x86)
-  <https://github.com/peersuasive/lecture/releases/download/v0.1/Lecture.0.1.Win32.zip>`_
+  <https://github.com/peersuasive/lecture/releases/download/v0.2/Lecture.0.2.Win32.zip>`_
+
+
 
 Installation
 ============
