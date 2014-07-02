@@ -22,6 +22,7 @@ local function new(_, book)
             list[#list+1] = not(f:match("/$")) and f or nil 
         end
         table.sort(list)
+        return true
     end
     function self:open(b)
         return open(b)
@@ -36,7 +37,10 @@ local function new(_, book)
         return list
     end
 
-    if(book)then open(book) end
+    if(book)then 
+        local r, e = open(book)
+        if not(r) then return nil, e end
+    end
     return self
 end
 
